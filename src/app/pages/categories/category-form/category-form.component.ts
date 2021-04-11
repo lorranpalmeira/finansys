@@ -5,8 +5,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 
 import toastr from "toastr";
-import { Category } from '../../shared/category.model';
-import { CategoryService } from '../../shared/category.service';
+import { Category } from '../shared/category.model';
+import { CategoryService } from '../shared/category.service';
 
 @Component({
   selector: 'app-category-form',
