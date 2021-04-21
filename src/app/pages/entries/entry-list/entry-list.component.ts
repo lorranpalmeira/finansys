@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { element } from '@angular/core/src/render3';
 import { Entry } from '../entry.model';
 
-import { EntryService, } from '../shared/entry.service';
+
+import { EntryService } from "../shared/entry.service";
 
 @Component({
   selector: 'app-entry-list',
@@ -11,26 +11,26 @@ import { EntryService, } from '../shared/entry.service';
 })
 export class EntryListComponent implements OnInit {
 
-  entries: Entry[] = []
+  entries: Entry[] = [];
 
   constructor(private entryService: EntryService) { }
 
   ngOnInit() {
-
-    this.entryService.getAll().subscribe((entries) => {
-      this.entries = entries,
-        error => alert('Erro ao buscar dados')
-    })
+    this.entryService.getAll().subscribe(
+      entries => this.entries = entries.sort((a,b) => b.id - a.id),
+      error => alert('Erro ao carregar a lista')
+    )
   }
 
-  deleteentry(id: number) {
-    const mustDelete = confirm('Deseja deletar o item?')
-
-    if (mustDelete)
-      this.entryService.delete(id).subscribe(
-        () => this.entries = this.entries.filter(element => element.id != id),
-        () => alert('Erro ao tentar excluir')
+  deleteEntry(entry) {
+    const mustDelete = confirm('Deseja realmente excluir este item?');
+    
+    if (mustDelete){
+      this.entryService.delete(entry.id).subscribe(
+        () => this.entries = this.entries.filter(element => element != entry),
+        () => alert("Erro ao tentar excluir!")
       )
+    }
   }
 
 }

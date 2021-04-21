@@ -1,6 +1,5 @@
 import { Category } from "../categories/shared/category.model";
 
-
 export class Entry {
   constructor(
     public id?: number,
@@ -17,7 +16,7 @@ export class Entry {
 
   static types = {
     expense: 'Despesa',
-    renevue: 'Receita'
+    revenue: 'Receita'
   };
 
   get paidText(): string {
